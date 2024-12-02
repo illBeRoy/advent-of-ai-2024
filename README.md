@@ -54,3 +54,4 @@ So, I decided to give the model a bit more direction by instructing it to work a
 
 This model managed to solve the following challenges:
 - [Day 1, Part 1](./src/solutions/day1/part1)
+- [Day 1, Part 2](./src/solutions/day1/part2)

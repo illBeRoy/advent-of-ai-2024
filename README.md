@@ -36,3 +36,21 @@ bun start
 ```
 
 If you do not wish to use Bun, just make sure that your alternative runtime supports typescript, `.env` files, and top-level `await`.
+
+## Models
+
+### v1
+
+![v1 model](./v1.png)
+
+I originally planned to just feed the instructions to ChatGPT and have it write the code. I soon realized that it wouldn't work because the code did not follow the instructions, had some very weird inconsistencies, and in some places even contradicted itself.
+
+So, I decided to give the model a bit more direction by instructing it to work a little bit like a human would:
+1. First, it should describe the problem, including how to parse the input, and steps to solve it.
+2. Then, it should implement each step individually as a separate function. Each function receives the input I tell it to expect (either the raw input, or the output of the previous step), and returns the output it thinks should match the expected result of that step (pure string for the last step).
+3. Then, I instructed it to create the exported "solver" function, which should use all the steps it created in the previous steps, and return the expected result as string.
+4. Finally, I told it to perform code review on the generated code. If it failed the review, it explains why and provides a revised version of the code, which is then also reviewed.
+5. Finally, after however many iterations it took to get the code right, once the code finally passes the review, that's what I return back as the solution.
+
+This model managed to solve the following challenges:
+- [Day 1, Part 1](./src/solutions/day1/part1)

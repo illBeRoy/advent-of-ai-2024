@@ -28,7 +28,9 @@ const { modelName } = await prompts({
   name: 'modelName',
   type: 'select',
   message: 'Select a model',
-  choices: modelsList.map((model) => ({ title: model, value: model })),
+  choices: modelsList
+    .toSorted()
+    .map((model) => ({ title: model, value: model })),
 });
 
 const model = (await import(`./models/${modelName}/model`).then(
@@ -40,7 +42,7 @@ const { challengeName } = await prompts({
   name: 'challengeName',
   type: 'select',
   message: 'Select a challenge',
-  choices: challengesList.map((model) => ({
+  choices: challengesList.toSorted().map((model) => ({
     title: model,
     value: model,
   })),
@@ -52,6 +54,7 @@ const { part } = await prompts({
   type: 'select',
   message: 'Select a challenge part',
   choices: partsList
+    .toSorted()
     .filter((f) => f.endsWith('.ts'))
     .map((part) => ({ title: part.slice(0, -3), value: part })),
 });

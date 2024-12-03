@@ -64,6 +64,12 @@ So, I decided to simplify the instructions. Instead of having it describe the al
 
 I also asked it to infer example inputs and outputs from the challenge description, meaning to use it to test the code; but so far it managed to solve all the challenges without it, so that's probably going to be included in v3.
 
+Note to self: I can clearly see that the model does not infer the example inputs correctly from the description. Oh well, we'll probably can wait with that for v3.
+
+Another note to self: this model is really flaky. Can I trust it to wake up in my stead and solve the challenges on my behalf every morning? Probably not just yet. Maybe the solution is to have the model run multiple times and pick the best result. Tomorrow we start with v3!
+
 This model managed to solve the following challenges:
 - [Day 2, Part 1](./src/solutions/day2/part1)
 - [Day 2, Part 2](./src/solutions/day2/part2)
+- [Day 3, Part 1](./src/solutions/day3/part1)
+- [Day 3, Part 2](./src/solutions/day3/part2)

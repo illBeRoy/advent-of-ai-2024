@@ -1,0 +1,34 @@
+Says:
+🧮 Breaking down the challenge...
+
+Says:
+✅ Challenge description broken down. Algorithm expected to have 8 steps.
+
+Thinks:
+{
+  "howToParseInputString": "The input string consists of multiple lines of space-separated integers. Each line represents a report. The levels within each report are separated by a single space (\" \").",
+  "algorithm": [
+    "Initialize a safe report counter.",
+    "For each report in the input list, do the following:",
+    "1. Split the report string into a list of integers.",
+    "2. Check if the list of integers is either strictly increasing or strictly decreasing.",
+    "   A sequence is considered strictly increasing if each subsequent integer is greater than the previous integer. \n   A sequence is considered strictly decreasing if each subsequent integer is less than the previous integer.",
+    "3. For every adjacent pair of numbers in the report, check if the absolute difference is between 1 and 3 inclusive.",
+    "4. If both conditions (either all increasing or all decreasing and the differences check) hold: increment the safe report counter.",
+    "5. After processing all reports, return the count of safe reports."
+  ],
+  "example": {
+    "input": "67 69 71 72 75 78 76\n4 6 7 9 11 12 12\n20 22 25 27 28 29 33\n35 37 39 42 43 46 48 53",
+    "output": "2"
+  }
+}
+
+Says:
+👨‍💻 Writing code...
+
+Thinks:
+{
+  "code": "export async function solver(input: string): Promise<string> {\n    const reports = input.trim().split('\\n');\n    let safeReportCounter = 0;\n\n    for (const report of reports) {\n        const numbers = report.split(' ').map(Number);\n        if (isStrictlyIncreasingOrDecreasing(numbers) && hasValidDifferences(numbers)) {\n            safeReportCounter++;\n        }\n    }\n\n    return safeReportCounter.toString();\n}\n\nfunction isStrictlyIncreasingOrDecreasing(numbers: number[]): boolean {\n    let isIncreasing = true;\n    let isDecreasing = true;\n\n    for (let i = 1; i < numbers.length; i++) {\n        if (numbers[i] <= numbers[i - 1]) {\n            isIncreasing = false;\n        }\n        if (numbers[i] >= numbers[i - 1]) {\n            isDecreasing = false;\n        }\n    }\n    return isIncreasing || isDecreasing;\n}\n\nfunction hasValidDifferences(numbers: number[]): boolean {\n    for (let i = 1; i < numbers.length; i++) {\n        const diff = Math.abs(numbers[i] - numbers[i - 1]);\n        if (diff < 1 || diff > 3) {\n            return false;\n        }\n    }\n    return true;\n}",
+  "reasoning": "The code implements the specified algorithm to count safe reports by defining the 'solver' function that processes each report and checks for strictly increasing or decreasing sequences along with the valid difference condition. Helper functions are used to encapsulate the logic for checking sequences and differences."
+}
+

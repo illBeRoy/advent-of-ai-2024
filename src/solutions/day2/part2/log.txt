@@ -1,0 +1,33 @@
+Says:
+🧮 Breaking down the challenge...
+
+Says:
+✅ Challenge description broken down. Algorithm expected to have 7 steps.
+
+Thinks:
+{
+  "howToParseInputString": "Each line of the input string represents a separate report. Each report consists of numbers separated by spaces. The delimiter to split the lines is \"\\n\" and to split the numbers within a report is \" \".",
+  "algorithm": [
+    "Split the input string into separate lines using '\\n'.",
+    "For each line, split it into individual numbers using ' '.",
+    "Check if the sequence of numbers is either strictly increasing or strictly decreasing.",
+    "For a sequence to be strictly increasing or decreasing, each number must differ from the next by at least 1 and at most 3. If it does, increment a safe report counter.",
+    "If the report is not safe, attempt to find if removing one level from the report can make it safe. Try removing each level and check again for the safety conditions.",
+    "If the modified report meets the safety criteria, increment the safe report counter.",
+    "Return the count of safe reports at the end."
+  ],
+  "example": {
+    "input": "67 69 71 72 75 78 76\n4 6 7 9 11 12 12\n20 22 25 27 28 29 33\n35 37 39 42 43 46 48 53\n46 49 48 51 53\n31 33 31 34 31\n83 86 85 88 89 91 91\n74 75 78 81 80 83 86 90\n72 73 72 74 75 80\n19 21 22 25 25 28\n... (more reports)",
+    "output": "4"
+  }
+}
+
+Says:
+💻 Writing code...
+
+Thinks:
+{
+  "code": "export async function solver(input: string): Promise<string> {\n    const lines = input.split('\\n');\n    let safeReportCount = 0;\n\n    for (const line of lines) {\n        const numbers = line.split(' ').map(Number);\n        let isSafe = isReportSafe(numbers);\n        if (isSafe) {\n            safeReportCount++;\n        } else {\n            for (let i = 0; i < numbers.length; i++) {\n                const modifiedReport = numbers.slice(0, i).concat(numbers.slice(i + 1));\n                if (isReportSafe(modifiedReport)) {\n                    safeReportCount++;\n                    break;\n                }\n            }\n        }\n    }\n    return safeReportCount.toString();\n}\n\nfunction isReportSafe(numbers: number[]): boolean {\n    let increasing = true;\n    let decreasing = true;\n\n    for (let i = 1; i < numbers.length; i++) {\n        const diff = Math.abs(numbers[i] - numbers[i - 1]);\n        if (diff < 1 || diff > 3) {\n            return false;\n        }\n        increasing = increasing && (numbers[i] > numbers[i - 1]);\n        decreasing = decreasing && (numbers[i] < numbers[i - 1]);\n    }\n\n    return increasing || decreasing;\n}",
+  "reasoning": "The code defines an asynchronous function 'solver' that counts safe reports according to specified criteria. It checks each report for strict increasing or decreasing sequences, allowing the removal of one number to achieve safety if necessary."
+}
+

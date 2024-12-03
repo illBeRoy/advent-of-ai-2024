@@ -85,7 +85,7 @@ if (solverAlreadyExists) {
   }
 }
 
-console.log('Running model...');
+console.log('🤖 Running model...\n---');
 
 let log = '';
 const ctx: Context = {
@@ -94,7 +94,7 @@ const ctx: Context = {
     log += `Says:\n${content}\n\n`;
   },
   think: (content) => {
-    log += `Thinks:\n${JSON.stringify(content)}\n\n`;
+    log += `Thinks:\n${JSON.stringify(content, null, 2)}\n\n`;
   },
 };
 

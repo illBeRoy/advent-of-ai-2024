@@ -55,3 +55,15 @@ So, I decided to give the model a bit more direction by instructing it to work a
 This model managed to solve the following challenges:
 - [Day 1, Part 1](./src/solutions/day1/part1)
 - [Day 1, Part 2](./src/solutions/day1/part2)
+
+![v2 model](./v2.png)
+
+The previous model was having a hard time following my exact instructions. And why should it? The challenges provided in the first days are not that complex. Any modern LLM should be able to solve them with minimal direction.
+
+So, I decided to simplify the instructions. Instead of having it describe the algorithm and then implement each step individually, I just asked it to write the code that solves all the steps it described.
+
+I also asked it to infer example inputs and outputs from the challenge description, meaning to use it to test the code; but so far it managed to solve all the challenges without it, so that's probably going to be included in v3.
+
+This model managed to solve the following challenges:
+- [Day 2, Part 1](./src/solutions/day2/part1)
+- [Day 2, Part 2](./src/solutions/day2/part2)

@@ -6,5 +6,6 @@ export interface Context {
 }
 
 export interface Model {
+  name: string;
   solve(challenge: Challenge, ctx: Context): Promise<string>;
 }

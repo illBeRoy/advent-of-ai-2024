@@ -7,6 +7,7 @@ import type { Challenge } from '../../challenge';
 const openai = new OpenAI();
 
 export const model: Model = {
+  name: 'OG over engineered model',
   solve: async (challenge, ctx) => {
     ctx.say('🧮 Breaking down the challenge...');
     const taskDescription = await describeChallenge(challenge);

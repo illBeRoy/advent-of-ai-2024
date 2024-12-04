@@ -4,6 +4,7 @@ import type { Challenge } from '../../challenge';
 import { prompt } from './prompt';
 
 export const model: Model = {
+  name: 'Simplified but flaky model',
   solve: async (challenge, ctx) => {
     ctx.say('🧮 Breaking down the challenge...');
     const taskDescription = await describeChallenge(challenge);

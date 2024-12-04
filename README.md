@@ -56,6 +56,8 @@ This model managed to solve the following challenges:
 - [Day 1, Part 1](./src/solutions/day1/part1)
 - [Day 1, Part 2](./src/solutions/day1/part2)
 
+### v2
+
 ![v2 model](./v2.png)
 
 The previous model was having a hard time following my exact instructions. And why should it? The challenges provided in the first days are not that complex. Any modern LLM should be able to solve them with minimal direction.
@@ -73,3 +75,24 @@ This model managed to solve the following challenges:
 - [Day 2, Part 2](./src/solutions/day2/part2)
 - [Day 3, Part 1](./src/solutions/day3/part1)
 - [Day 3, Part 2](./src/solutions/day3/part2)
+
+### v3
+
+![v3 model](./v3.png)
+
+The first thing I tackled was parsing the example input and output. Since the previous version hallucinated quite a bit, I decided to double down on the extraction:
+1. I made extracting the examples its own step, to provide context isolation and help the model focus on the task at hand.
+2. I improved the prompt to include examples from previous days, to help the model understand precisely what I need it to return.
+
+This also marks the return of the feedback loop: I now ask the model to TEST the code it writes with the examples it parsed. If the code passes the test, it gets returned as the solution; otherwise, the model is asked to provide a list of changes to make to the code, which is then refactored in a separate step, and the process starts all over again.
+
+This time, I tried to up my prompting game, by having ChatGPT (the app) write the prompts for me according to my specifications.
+
+I then made changes to the prompts to tackle specific issues that arose from the original prompts. Those include:
+1. Model forgetting to export the "solver" function; I made sure the code writing phase takes that into account, but also the test step explicitly checks for that.
+2. Model assuming things about the input format; I added more tight instructions as to what the model can assume about the input, and emphasized that the real input might vary in size and content from the examples.
+
+The thing I see is that the model sometimes passes the tests when it shouldn't. That's to be expected, since no code is actually being run. I guess that one of the first things to do in the next version is to have the model WRITE the test code for me, and then run it myself.
+
+This model managed to solve the following challenges:
+- [Day 4, Part 1](./src/solutions/day4/part1)
